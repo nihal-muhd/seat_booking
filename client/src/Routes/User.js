@@ -20,7 +20,7 @@ function User() {
             <Routes>
                 <Route element={<EventRegisterPage />} path='/event-register' />
             </Routes>
-
+   
         </div>
     )
 }

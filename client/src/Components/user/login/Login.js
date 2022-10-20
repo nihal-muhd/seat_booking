@@ -1,11 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
+import {useCookies} from 'react-cookie'
 
 function Login() {
     const navigate=useNavigate()
+    const [cookies,setCookies]=useCookies([])
+    console.log(cookies,"hahhahahah")
+    useEffect(()=>{
+        if(cookies.jwt){
+            navigate('/')
+        }
+    })
     
     const [formData,setFormData]=useState({
         email:'',
@@ -23,9 +31,15 @@ function Login() {
 
     const handleSubmit=async(e)=>{
         e.preventDefault()
-        console.log(formData,"hiiiiloo");
-        let data=await axios.post('http://localhost:5000/login',formData)
-        navigate('/')
+        let response=await axios.post('http://localhost:5000/login',formData,{ withCredentials: true })
+        console.log(response,"nivhuu")
+        if(response.data.status===true){
+            navigate('/')
+        }else{
+            console.log(response.error)
+        }
+    
+
     
     }
 

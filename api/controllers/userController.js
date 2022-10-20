@@ -19,25 +19,26 @@ module.exports.doSignUp = asyncHandler(async (req, res, next) => {
 })
 module.exports.doLogin = asyncHandler(async (req, res, next) => {
     try {
-        console.log(req.body,"this is me")
+        const maxAge = 60 * 60 * 24;
         const { email, password } = req.body;
-        const user = await UserModel.findOne({ email: req.body.email })
-
-        if (user && (await bcrypt.compare(password, user.password))) {
-            // create token
-            const token = jwt.sign(
-                { user_id: user._id, email },
-                process.env.TOKEN_KEY,
-                {
-                    expiresIn: "2h"
-                }
-            )
-            user.token = token
-            console.log(token,"hiiii")
-
-            res.status(200).json(user)
+        const user = await UserModel.findOne({ email: email })
+        
+        if(user){
+            const passwordCheck=await bcrypt.compare(password,user.password)
+            if(passwordCheck){
+                const token=jwt.sign({userId:user._id},process.env.TOKEN_KEY,{expiresIn:maxAge})
+                res.cookie("jwt",token,{
+                    withCrdentials: true,
+                    httpOnly: false,
+                    maxAge: maxAge * 1000
+                })
+                res.status(201).json({userId:user._id,status:true})
+            }else{
+                throw Error("Invalid password")
+            }
+        }else{
+            throw Error("Invalid email")
         }
-        res.status(400).send("Invalid Credentials");
     } catch (error) {
         console.log(error);
     }
