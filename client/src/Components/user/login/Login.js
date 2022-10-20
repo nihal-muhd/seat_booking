@@ -23,7 +23,9 @@ function Login() {
 
     const handleSubmit=async(e)=>{
         e.preventDefault()
+        console.log(formData,"hiiiiloo");
         let data=await axios.post('http://localhost:5000/login',formData)
+        navigate('/')
     
     }
 
