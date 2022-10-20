@@ -2,7 +2,7 @@ const asyncHandler = require('express-async-handler')
 const UserModel = require('../models/userModel')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const auth=require('../middleware/auth')
+
 
 module.exports.doSignUp = asyncHandler(async (req, res, next) => {
     try {
@@ -22,26 +22,41 @@ module.exports.doLogin = asyncHandler(async (req, res, next) => {
         const maxAge = 60 * 60 * 24;
         const { email, password } = req.body;
         const user = await UserModel.findOne({ email: email })
-        
-        if(user){
-            const passwordCheck=await bcrypt.compare(password,user.password)
-            if(passwordCheck){
-                const token=jwt.sign({userId:user._id},process.env.TOKEN_KEY,{expiresIn:maxAge})
-                res.cookie("jwt",token,{
+
+        if (user) {
+            const passwordCheck = await bcrypt.compare(password, user.password)
+            if (passwordCheck) {
+                const token = jwt.sign({ userId: user._id }, process.env.TOKEN_KEY, { expiresIn: maxAge })
+                res.cookie("jwt", token, {
                     withCrdentials: true,
                     httpOnly: false,
                     maxAge: maxAge * 1000
                 })
-                res.status(201).json({userId:user._id,status:true})
-            }else{
+                res.status(201).json({ userId: user._id, status: true })
+            } else {
                 throw Error("Invalid password")
             }
-        }else{
+        } else {
             throw Error("Invalid email")
         }
     } catch (error) {
         console.log(error);
     }
 
+})
+module.exports.userHome = asyncHandler(async (req, res, next) => {
+    try {
+        res.status(200).json({ status: true })
+    } catch (error) {
+
+    }
+})
+module.exports.doEventApply = asyncHandler(async (req, res, next) => {
+    try {
+        const data = req.body
+
+    } catch (error) {
+
+    }
 })
 

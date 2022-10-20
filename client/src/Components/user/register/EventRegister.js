@@ -1,8 +1,30 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 function EventRegister() {
+    const [formData, setFormData] = useState({
+        name: '',
+        address: '',
+        mobile: '',
+        CompanyName: '',
+        TeamBackground: '',
+        companyProduct: ''
+
+    })
+    const { name, address, mobile, CompanyName, TeamBackground, companyProduct } = formData
+    const handleChange = (e) => {
+        setFormData((prevState) => ({
+            ...prevState,
+            [e.target.name]: e.target.value
+        }))
+    }
+
+    const handleSubmit =async (e) => {
+        e.preventDefault()
+        let response=await axios.post('http://localhost:5000/applicationForm')
+    }
     return (
         <React.Fragment>
             <div className='container'>
@@ -10,34 +32,30 @@ function EventRegister() {
                     <div className='col-6 mt-5'>
                         <h2 className='head'>Enter Your Startup details</h2>
                         <div className=''>
-                            <Form className=''>
+                            <Form onSubmit={handleSubmit}>
                                 <Form.Group className="mb-3" controlId="formBasicName">
                                     <Form.Label>Full name</Form.Label>
-                                    <Form.Control type="text" placeholder="Enter name" name='name' />
+                                    <Form.Control type="text" placeholder="Enter name" name='name' onChange={handleChange} value={name} />
                                 </Form.Group>
-                                <Form.Group className="mb-3" controlId="formBasicEmail">
+                                <Form.Group className="mb-3" controlId="formBasicAddress">
                                     <Form.Label>Address</Form.Label>
-                                    <Form.Control type="text" placeholder="Enter email" name='email' />
+                                    <Form.Control type="text" placeholder="Enter address" name='address' value={address} onChange={handleChange} />
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicPhone">
                                     <Form.Label>Phone Number</Form.Label>
-                                    <Form.Control type="number" placeholder="Enter mobile number" name='mobile' />
+                                    <Form.Control type="number" placeholder="Enter mobile number" name='mobile' value={mobile} onChange={handleChange} />
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicCompany">
                                     <Form.Label>Company Name</Form.Label>
-                                    <Form.Control type="text" placeholder="Company Name" name='Company-Name' />
-                                </Form.Group>
-                                <Form.Group className="mb-3" controlId="formBasicLogo">
-                                    <Form.Label>Company Logo</Form.Label>
-                                    <Form.Control type="file" name='Company-Logo' />
+                                    <Form.Control type="text" placeholder="Company Name" name='CompanyName' onChange={handleChange} value={CompanyName} />
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicTeam">
                                     <Form.Label>Describe your team and background</Form.Label>
-                                    <Form.Control as="textarea" name='Team-Background' />
+                                    <Form.Control as="textarea" name='TeamBackground' value={TeamBackground} onChange={handleChange} />
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicProducts">
                                     <Form.Label>Describe your comapany and products</Form.Label>
-                                    <Form.Control as="textarea" name='company-products' />
+                                    <Form.Control as="textarea" name='companyProduct' value={companyProduct} onChange={handleChange} />
                                 </Form.Group>
 
                                 <Button variant="primary" type="submit">

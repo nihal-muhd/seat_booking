@@ -5,7 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import { useNavigate } from 'react-router-dom'
 
 
-function HomeNavbar() {
+function HomeNavbar(props) {
   const navigate=useNavigate()
   return (
     <React.Fragment>
@@ -18,8 +18,8 @@ function HomeNavbar() {
 
             </Nav>
             <Nav>
-              <Nav.Link eventKey={2}  onClick={()=>navigate("/login")}>
-                Login
+              <Nav.Link eventKey={2}  onClick={props.logOut}>
+                Logout
               </Nav.Link>
              
             </Nav>

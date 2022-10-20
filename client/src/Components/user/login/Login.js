@@ -8,7 +8,6 @@ import {useCookies} from 'react-cookie'
 function Login() {
     const navigate=useNavigate()
     const [cookies,setCookies]=useCookies([])
-    console.log(cookies,"hahhahahah")
     useEffect(()=>{
         if(cookies.jwt){
             navigate('/')
