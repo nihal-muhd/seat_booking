@@ -43,7 +43,7 @@ module.exports.doLogin = asyncHandler(async (req, res, next) => {
                     httpOnly: false,
                     maxAge: maxAge * 1000
                 })
-                res.status(201).json({ userId: user._id,username:user.name, status: true })
+                res.status(201).json({ userId: user._id, username: user.name, status: true })
             } else {
                 throw Error("Invalid password")
             }
@@ -59,18 +59,21 @@ module.exports.doLogin = asyncHandler(async (req, res, next) => {
 module.exports.submitForm = asyncHandler(async (req, res, next) => {
     try {
         const user = await getUser(req.cookies.jwt)
-        const userId=user._id
+        const userId = user._id
         const data = req.body
-        await UserModel.updateOne({_id:userId},{$set:{
-            'application.name':data.name,
-            'application.address':data.address,
-            'application.mobile':data.mobile,
-            'application.CompanyName':data.CompanyName,
-            'application.TeamBackground':data.TeamBackground,
-            'application.companyProduct':data.companyProduct
-        }})
+        await UserModel.updateOne({ _id: userId }, {
+            $set: {
+                'application.name': data.name,
+                'application.address': data.address,
+                'application.mobile': data.mobile,
+                'application.CompanyName': data.CompanyName,
+                'application.TeamBackground': data.TeamBackground,
+                'application.companyProduct': data.companyProduct,
+                applicationStatus:'pending'
+            }
+        })
         res.status(200).json({
-            status:'application updated'
+            status: 'application updated'
         })
     } catch (error) {
 

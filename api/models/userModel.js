@@ -21,28 +21,32 @@ const userSchema = new mongoose.Schema({
     application: {
         name: {
             type: String,
-            required: [true, 'Please provide a name']
+            
         },
         address: {
             type: String,
-            required: [true, 'Please provide a address']
+            
         },
         mobile: {
             type: Number,
-            required: [true, 'Please provide mobile number']
+            
         },
         CompanyName: {
             type: String,
-            required: [true, 'Please provide a company name']
+            
         },
         TeamBackground: {
             type: String,
-            required: [true, 'Please provide team and background']
+            
         },
         companyProduct: {
             type: String,
-            required: [true, 'Please provide company and product']
+            
         }
+    },
+    applicationStatus:{
+        type:String,
+        default:false
     }
 },
     {

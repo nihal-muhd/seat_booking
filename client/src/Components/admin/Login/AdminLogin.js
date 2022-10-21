@@ -30,7 +30,6 @@ function AdminLogin() {
     }
 
     const handleSubmit = async (e) => {
-        console.log(formData, "admin")
         e.preventDefault()
         let response = await axios.post('http://localhost:5000/admin/login', formData, { withCredentials: true })
         if (response.data.status === true) {

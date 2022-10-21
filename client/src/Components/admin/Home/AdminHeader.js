@@ -3,8 +3,15 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { useNavigate } from 'react-router-dom';
+
 
 function AdminHeader(props) {
+    const navigate=useNavigate()
+
+    const NewApplication=()=>{
+        navigate('/admin/view-application')
+    }
     return (
         <React.Fragment>
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -15,7 +22,7 @@ function AdminHeader(props) {
                         <Nav className="me-auto">
                             <Nav.Link href="#link">Users</Nav.Link>
                             <NavDropdown title="Applications" id="basic-nav-dropdown">
-                                <NavDropdown.Item href="#action/3.1">New application</NavDropdown.Item>
+                                <NavDropdown.Item onClick={NewApplication}>New application</NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.1">Approved application</NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.1">Rejected application</NavDropdown.Item>
                             </NavDropdown>
