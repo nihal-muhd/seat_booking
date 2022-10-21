@@ -2,8 +2,10 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { useNavigate } from 'react-router-dom';
 
 function EventRegister() {
+    const navigate=useNavigate()
     const [formData, setFormData] = useState({
         name: '',
         address: '',
@@ -23,7 +25,12 @@ function EventRegister() {
 
     const handleSubmit =async (e) => {
         e.preventDefault()
-        let response=await axios.post('http://localhost:5000/applicationForm')
+        let response=await axios.post('http://localhost:5000/applicationForm',formData,{withCredentials:true})
+        if(response.status===200){
+            navigate('/')
+        }else{
+            console.log("application not updated")
+        }
     }
     return (
         <React.Fragment>

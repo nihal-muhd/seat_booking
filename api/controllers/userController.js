@@ -3,6 +3,17 @@ const UserModel = require('../models/userModel')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
+const getUser = async (token) => {
+    try {
+        const jwtToken = jwt.verify(token, process.env.TOKEN_KEY)
+        const userID = jwtToken.userId
+        const user = await UserModel.findOne({ _id: userID })
+        return user
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 
 module.exports.doSignUp = asyncHandler(async (req, res, next) => {
     try {
@@ -44,17 +55,23 @@ module.exports.doLogin = asyncHandler(async (req, res, next) => {
     }
 
 })
-module.exports.userHome = asyncHandler(async (req, res, next) => {
-    try {
-        res.status(200).json({ status: true })
-    } catch (error) {
 
-    }
-})
-module.exports.doEventApply = asyncHandler(async (req, res, next) => {
+module.exports.submitForm = asyncHandler(async (req, res, next) => {
     try {
+        const user = await getUser(req.cookies.jwt)
+        const userId=user._id
         const data = req.body
-
+        await UserModel.updateOne({_id:userId},{$set:{
+            'application.name':data.name,
+            'application.address':data.address,
+            'application.mobile':data.mobile,
+            'application.CompanyName':data.CompanyName,
+            'application.TeamBackground':data.TeamBackground,
+            'application.companyProduct':data.companyProduct
+        }})
+        res.status(200).json({
+            status:'application updated'
+        })
     } catch (error) {
 
     }

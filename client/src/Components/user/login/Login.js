@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import {useCookies} from 'react-cookie'
 
+
 function Login() {
+ 
     const navigate=useNavigate()
     const [cookies,setCookies]=useCookies([])
     useEffect(()=>{
@@ -35,7 +37,7 @@ function Login() {
         if(response.data.status===true){
             navigate('/')
         }else{
-            console.log(response.error)
+          console.log("please enter valid passord or email");
         }
     
 
