@@ -43,7 +43,7 @@ module.exports.doLogin = asyncHandler(async (req, res, next) => {
                     httpOnly: false,
                     maxAge: maxAge * 1000
                 })
-                res.status(201).json({ userId: user._id, status: true })
+                res.status(201).json({ userId: user._id,username:user.name, status: true })
             } else {
                 throw Error("Invalid password")
             }
