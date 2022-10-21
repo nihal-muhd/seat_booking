@@ -5,6 +5,8 @@ import AdminLoginPage from '../Pages/admin/AdminLoginPage'
 import AdminApplicatioinPage from '../Pages/admin/AdminApplicatioinPage'
 import AdminViewUserPage from '../Pages/admin/AdminViewUserPage'
 import AdminEditUserPage from '../Pages/admin/AdminEditUserPage'
+import AdminAprovedPage from '../Pages/admin/AdminAprovedPage'
+import AdminRejectedPage from '../Pages/admin/AdminRejectedPage'
 
 
 
@@ -26,6 +28,14 @@ function Admin() {
             <Routes>
                 <Route element={<AdminEditUserPage />} path='/edit-users' />
             </Routes>
+            <Routes>
+                <Route element={<AdminAprovedPage />} path='/approved-application' />
+            </Routes>
+            <Routes>
+                <Route element={<AdminRejectedPage />} path='/rejected-application' />
+            </Routes>
+
+
 
 
 

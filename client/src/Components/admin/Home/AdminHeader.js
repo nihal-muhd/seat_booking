@@ -15,6 +15,12 @@ function AdminHeader(props) {
     const viewUsers = () => {
         navigate('/admin/view-users')
     }
+    const ApprovedApplication = () => {
+        navigate('/admin/approved-application')
+    }
+    const RejectedApplication = () => {
+        navigate('/admin/rejected-application')
+    }
     return (
         <React.Fragment>
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -26,8 +32,8 @@ function AdminHeader(props) {
                             <Nav.Link onClick={viewUsers}>Users</Nav.Link>
                             <NavDropdown title="Applications" id="basic-nav-dropdown">
                                 <NavDropdown.Item onClick={NewApplication}>New application</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.1">Approved application</NavDropdown.Item>
-                                <NavDropdown.Item href="#action/3.1">Rejected application</NavDropdown.Item>
+                                <NavDropdown.Item onClick={ApprovedApplication}>Approved application</NavDropdown.Item>
+                                <NavDropdown.Item onClick={RejectedApplication}>Rejected application</NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
                         <Nav>
