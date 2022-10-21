@@ -12,7 +12,7 @@ function AdminHomePage() {
       if (!cookies.adminjwt) {
         navigate('/admin/login')
       } else {
-        console.log("admin hii")
+        console.log("admin home")
       }
     }
     verifyUser()

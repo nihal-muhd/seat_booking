@@ -3,6 +3,8 @@ import { Routes, Route } from 'react-router-dom'
 import AdminHomePage from '../Pages/admin/AdminHomePage'
 import AdminLoginPage from '../Pages/admin/AdminLoginPage'
 import AdminApplicatioinPage from '../Pages/admin/AdminApplicatioinPage'
+import AdminViewUserPage from '../Pages/admin/AdminViewUserPage'
+import AdminEditUserPage from '../Pages/admin/AdminEditUserPage'
 
 
 
@@ -13,10 +15,16 @@ function Admin() {
                 <Route element={<AdminLoginPage />} path='/login' />
             </Routes>
             <Routes>
-                <Route element={<AdminHomePage />} exact path='/' />
+                <Route element={<AdminHomePage />} path='/' />
             </Routes>
             <Routes>
-                <Route element={<AdminApplicatioinPage />} exact path='/view-application' />
+                <Route element={<AdminApplicatioinPage />} path='/view-application' />
+            </Routes>
+            <Routes>
+                <Route element={<AdminViewUserPage />} path='/view-users' />
+            </Routes>
+            <Routes>
+                <Route element={<AdminEditUserPage />} path='/edit-users' />
             </Routes>
 
 

@@ -7,10 +7,13 @@ import { useNavigate } from 'react-router-dom';
 
 
 function AdminHeader(props) {
-    const navigate=useNavigate()
+    const navigate = useNavigate()
 
-    const NewApplication=()=>{
+    const NewApplication = () => {
         navigate('/admin/view-application')
+    }
+    const viewUsers = () => {
+        navigate('/admin/view-users')
     }
     return (
         <React.Fragment>
@@ -20,7 +23,7 @@ function AdminHeader(props) {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
-                            <Nav.Link href="#link">Users</Nav.Link>
+                            <Nav.Link onClick={viewUsers}>Users</Nav.Link>
                             <NavDropdown title="Applications" id="basic-nav-dropdown">
                                 <NavDropdown.Item onClick={NewApplication}>New application</NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.1">Approved application</NavDropdown.Item>

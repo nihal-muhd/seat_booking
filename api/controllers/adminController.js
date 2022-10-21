@@ -29,23 +29,64 @@ module.exports.adminLogin = asyncHandler(async (req, res, next) => {
 
 })
 
-module.exports.getApplication=asyncHandler(async(req,res,next)=>{
+module.exports.getApplication = asyncHandler(async (req, res, next) => {
     try {
-        const applications=await UserModel.find({applicationStatus:'pending'})
-        res.status(200).json({status:true,applications:applications})
+        const applications = await UserModel.find({ applicationStatus: 'pending' })
+        res.status(200).json({ status: true, applications: applications })
     } catch (error) {
-        
+
     }
 })
 
-module.exports.changeStatus=asyncHandler(async(req,res,next)=>{
+module.exports.changeStatus = asyncHandler(async (req, res, next) => {
     try {
-        const data=req.body
-        await UserModel.updateOne({_id:data.userId},{$set:{
-            applicationStatus:data.status
-        }})
-    res.status(200).json({status:true})
+        const data = req.body
+        await UserModel.updateOne({ _id: data.userId }, {
+            $set: {
+                applicationStatus: data.status
+            }
+        })
+        res.status(200).json({ status: true })
     } catch (error) {
-        
+
+    }
+})
+
+module.exports.getUser = asyncHandler(async (req, res, next) => {
+    try {
+        const users = await UserModel.find().lean()
+        res.status(200).json({ status: true, users: users })
+    } catch (error) {
+
+    }
+})
+
+module.exports.deleteUser = asyncHandler(async (req, res, next) => {
+    try {
+        const userId = req.body.userId
+        await UserModel.deleteOne({ _id: userId })
+        res.status(200).json({ status: true })
+    } catch (error) {
+
+    }
+})
+
+module.exports.editUser = asyncHandler(async (req, res, next) => {
+    try {
+        console.log(req.body, "mutaa")
+        const formData = req.body.formData
+        const userId = req.body.useId
+        await UserModel.updateOne({ _id: userId }, {
+            $set: {
+                name: formData.name,
+                email: formData.email,
+                mobile: formData.mobile
+            }
+        })
+        res.status(200).json({
+            status: true
+        })
+    } catch (error) {
+
     }
 })
