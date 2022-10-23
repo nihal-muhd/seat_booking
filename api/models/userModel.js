@@ -21,32 +21,43 @@ const userSchema = new mongoose.Schema({
     application: {
         name: {
             type: String,
-            
+
         },
         address: {
             type: String,
-            
+
         },
         mobile: {
             type: Number,
-            
+
         },
         CompanyName: {
             type: String,
-            
+
         },
         TeamBackground: {
             type: String,
-            
+
         },
         companyProduct: {
             type: String,
-            
+
         }
     },
-    applicationStatus:{
-        type:String,
-        default:false
+    applicationStatus: {
+        type: String,
+        default: false
+    },
+    form: {
+        type: Boolean,
+        default: false
+    },
+    seatNumber: {
+        type: String
+    },
+    reserveStatus: {
+        type: Boolean,
+        default: false
     }
 },
     {

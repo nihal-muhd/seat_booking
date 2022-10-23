@@ -1,47 +1,64 @@
-import React, {  useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom'
+import { UserAuthContext } from '../../../Context/UserAuthContext'
 import axios from 'axios';
-import {useCookies} from 'react-cookie'
+import { useCookies } from 'react-cookie'
 
 
 function Login() {
- 
-    const navigate=useNavigate()
-    const [cookies,setCookies]=useCookies([])
-    useEffect(()=>{
-        if(cookies.jwt){
+    const { user, setUser } = useContext(UserAuthContext)
+
+    const navigate = useNavigate()
+    const [cookies, setCookies] = useCookies([])
+    useEffect(() => {
+        if (cookies.jwt) {
             navigate('/')
         }
     })
-    
-    const [formData,setFormData]=useState({
-        email:'',
-        password:''
+
+    const [formData, setFormData] = useState({
+        email: '',
+        password: ''
     })
 
-    const {email,password}=formData
+    const { email, password } = formData
 
-    const handleChange=(e)=>{
-        setFormData((prevState)=>({
+    const handleChange = (e) => {
+        setFormData((prevState) => ({
             ...prevState,
-            [e.target.name]:e.target.value
+            [e.target.name]: e.target.value
         }))
     }
 
-    const handleSubmit=async(e)=>{
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        let response=await axios.post('http://localhost:5000/login',formData,{ withCredentials: true })
-        console.log(response,"nivhuu")
-        if(response.data.status===true){
+        let response = await axios.post('http://localhost:5000/login', formData, { withCredentials: true })
+        console.log(response, "nivhuu")
+        if (response.data.status === true) {
+            setUser({
+                ...user,
+                id: response.data.userId,
+                name: response.data.username.name,
+                form: response.data.username.form,
+                formStatus: response.data.username.applicationStatus
+            })
             navigate('/')
-        }else{
-          console.log("please enter valid passord or email");
-        }
-    
+        } else {
+            setUser({
+                ...user,
+                id: null,
+                name: null,
+                form: false,
+                formStatus: null
+            })
 
-    
+            console.log("please enter valid passord or email");
+        }
+
+
+
     }
 
     return (
@@ -58,11 +75,11 @@ function Login() {
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicPassword">
                                     <Form.Label>Password</Form.Label>
-                                    <Form.Control type="password" placeholder="Password" name='password' onChange={handleChange} value={password}/>
+                                    <Form.Control type="password" placeholder="Password" name='password' onChange={handleChange} value={password} />
                                 </Form.Group>
                                 <Form.Group>
 
-                                <Form.Label onClick={()=>navigate("/signup")} style={{cursor:'pointer'}}>Dont have account?</Form.Label>
+                                    <Form.Label onClick={() => navigate("/signup")} style={{ cursor: 'pointer' }}>Dont have account?</Form.Label>
                                 </Form.Group>
                                 <Button variant="primary" type="submit">
                                     Submit

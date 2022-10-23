@@ -31,8 +31,7 @@ function AdminRejectedApp() {
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th>Company Name</th>
-                                <th>Seat number</th>
-                                <th>Action</th>
+                               
                             </tr>
                         </thead>
                         <tbody>
@@ -45,8 +44,7 @@ function AdminRejectedApp() {
                                         <td>{obj.email}</td>
                                         <td>{obj.application.mobile}</td>
                                         <td>{obj.application.CompanyName}</td>
-                                        {/* <td><Button variant="success" onClick={() => { editUser(obj._id, obj.name, obj.email, obj.mobile) }} style={{ marginRight: 10 }}>Edit</Button><Button variant="danger" onClick={() => { deleteUser(obj._id) }} >Delete</Button></td> */}
-
+                                       
                                     </tr>
                                 )
                             })}

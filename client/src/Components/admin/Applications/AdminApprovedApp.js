@@ -2,19 +2,29 @@ import React, { useState, useEffect } from 'react'
 import Table from 'react-bootstrap/Table';
 import axios from 'axios';
 import './AdminApprovedApp.css'
+import Button from 'react-bootstrap/Button';
+import { useNavigate } from 'react-router-dom';
+import { BsFillCheckCircleFill } from "react-icons/bs"
+
 
 function AdminApprovedApp() {
+    const navigate=useNavigate()
     const [applications, setApplications] = useState([])
 
     useEffect(() => {
         async function getApplication() {
-            const  approved  = await axios.get('http://localhost:5000/admin/approvedApplication', { withCredentials: true })
+            const approved = await axios.get('http://localhost:5000/admin/approvedApplication', { withCredentials: true })
+            console.log(approved.data.application,"approved")
             if (approved.data.status === true) {
                 setApplications(approved.data.application)
             }
         }
         getApplication()
     }, [])
+
+    const BookSeat = (userId) => {
+        navigate('/admin/book-seat',{state:{userId}})
+        }
 
     return (
         <React.Fragment>
@@ -35,7 +45,7 @@ function AdminApprovedApp() {
                         </thead>
                         <tbody>
 
-                             {applications.map((obj, index) => {
+                            {applications.map((obj, index) => {
                                 return (
                                     <tr>
                                         <td>{index + 1}</td>
@@ -43,11 +53,12 @@ function AdminApprovedApp() {
                                         <td>{obj.email}</td>
                                         <td>{obj.application.mobile}</td>
                                         <td>{obj.application.CompanyName}</td>
-                                        {/* <td><Button variant="success" onClick={() => { editUser(obj._id, obj.name, obj.email, obj.mobile) }} style={{ marginRight: 10 }}>Edit</Button><Button variant="danger" onClick={() => { deleteUser(obj._id) }} >Delete</Button></td> */}
+                                        <td>{obj.reserveStatus?obj.seatNumber:''}</td>
+                                        <td>{obj.reserveStatus?<BsFillCheckCircleFill style={{color:'green'}}/>:<Button onClick={()=>{BookSeat(obj._id)}}>Book seat</Button>}</td>
 
                                     </tr>
                                 )
-                            })} 
+                            })}
 
 
 

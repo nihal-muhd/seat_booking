@@ -43,7 +43,7 @@ module.exports.doLogin = asyncHandler(async (req, res, next) => {
                     httpOnly: false,
                     maxAge: maxAge * 1000
                 })
-                res.status(201).json({ userId: user._id, username: user.name, status: true })
+                res.status(201).json({ userId: user._id, username: user, status: true })
             } else {
                 throw Error("Invalid password")
             }
@@ -69,7 +69,9 @@ module.exports.submitForm = asyncHandler(async (req, res, next) => {
                 'application.CompanyName': data.CompanyName,
                 'application.TeamBackground': data.TeamBackground,
                 'application.companyProduct': data.companyProduct,
-                applicationStatus:'pending'
+                applicationStatus: 'pending',
+                form: true
+
             }
         })
         res.status(200).json({
@@ -78,5 +80,10 @@ module.exports.submitForm = asyncHandler(async (req, res, next) => {
     } catch (error) {
 
     }
+})
+
+module.exports.userData = asyncHandler(async (req, res, next) => {
+    const user = await getUser(req.cookies.jwt)
+    res.status(200).json({ status: true, user: user })
 })
 

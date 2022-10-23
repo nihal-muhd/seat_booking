@@ -7,6 +7,7 @@ import AdminViewUserPage from '../Pages/admin/AdminViewUserPage'
 import AdminEditUserPage from '../Pages/admin/AdminEditUserPage'
 import AdminAprovedPage from '../Pages/admin/AdminAprovedPage'
 import AdminRejectedPage from '../Pages/admin/AdminRejectedPage'
+import AdminBookSeatPage from '../Pages/admin/AdminBookSeatPage'
 
 
 
@@ -33,6 +34,9 @@ function Admin() {
             </Routes>
             <Routes>
                 <Route element={<AdminRejectedPage />} path='/rejected-application' />
+            </Routes>
+            <Routes>
+                <Route element={<AdminBookSeatPage />} path='/book-seat' />
             </Routes>
 
 

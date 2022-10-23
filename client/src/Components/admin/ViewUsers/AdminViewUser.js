@@ -3,11 +3,11 @@ import Table from 'react-bootstrap/Table';
 import './AdminViewUser.css'
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 
 function AdminViewUser() {
-    const navigate=useNavigate()
+    const navigate = useNavigate()
     const [user, setUser] = useState([])
 
     useEffect(() => {
@@ -20,13 +20,13 @@ function AdminViewUser() {
         getUsers()
     }, [])
 
-    const editUser = (userId,username,email,mobile) => {
-        navigate('/admin/edit-users',{state:{_id:userId,name:username,email:email,mobile:mobile}})
+    const editUser = (userId, username, email, mobile) => {
+        navigate('/admin/edit-users', { state: { _id: userId, name: username, email: email, mobile: mobile } })
 
     }
 
     const deleteUser = async (userId) => {
-        console.log(userId,"ihhhh");
+        console.log(userId, "ihhhh");
         const dltUser = await axios.post('http://localhost:5000/admin/deleteUser', { userId: userId }, { withCredentials: true })
         if (dltUser.data.status === true) {
             const newUsers = user.filter((element) => element._id !== userId)
@@ -61,7 +61,8 @@ function AdminViewUser() {
                                         <td>{obj.name}</td>
                                         <td>{obj.email}</td>
                                         <td>{obj.mobile}</td>
-                                        <td><Button variant="success" onClick={() => { editUser( obj._id,obj.name,obj.email,obj.mobile) }} style={{ marginRight: 10 }}>Edit</Button><Button variant="danger" onClick={() => { deleteUser( obj._id) }} >Delete</Button></td>
+                                        <td><Button variant="success" onClick={() => { editUser(obj._id, obj.name, obj.email, obj.mobile) }} style={{ marginRight: 10 }}>Edit</Button>
+                                            <Button variant="danger" onClick={() => { if (window.confirm('Do you want to delete this user?')) { deleteUser(obj._id) } }} >Delete</Button></td>
 
                                     </tr>
                                 )

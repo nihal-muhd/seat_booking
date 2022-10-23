@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler')
 const UserModel = require('../models/userModel')
 const jwt = require('jsonwebtoken')
+const seatModel = require('../models/seatModel')
 
 const adminDetails = {
     adminID: 'admin123',
@@ -73,7 +74,6 @@ module.exports.deleteUser = asyncHandler(async (req, res, next) => {
 
 module.exports.editUser = asyncHandler(async (req, res, next) => {
     try {
-        console.log(req.body, "mutaa")
         const formData = req.body.formData
         const userId = req.body.useId
         await UserModel.updateOne({ _id: userId }, {
@@ -104,6 +104,38 @@ module.exports.rejectedApplication = asyncHandler(async (req, res, next) => {
     try {
         const application = await UserModel.find({ applicationStatus: 'reject' }).lean()
         res.status(200).json({ status: true, application })
+    } catch (error) {
+
+    }
+})
+
+module.exports.reserveSeat = asyncHandler(async (req, res, next) => {
+    try {
+        req.body.status = true
+        const data = req.body
+
+        console.log(data, "nnnnn")
+        await UserModel.updateOne({ _id: data.userId }, {
+            $set: {
+                seatNumber: data.seatno,
+                reserveStatus: true
+            }
+        })
+        await seatModel.updateOne({_id:data.seatId},{$set:{
+            seatno:data.seatno,
+            status:data.status,
+            userId:data.userId
+        }})
+        res.status(201).json({ status: true })
+    } catch (error) {
+
+    }
+})
+
+module.exports.bookedSeats = asyncHandler(async (req, res, next) => {
+    try {
+        const seats = await seatModel.find().lean()
+        res.status(200).json({ status: true, seats })
     } catch (error) {
 
     }
