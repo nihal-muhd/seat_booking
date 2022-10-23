@@ -4,8 +4,10 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useNavigate } from 'react-router-dom';
 import { UserAuthContext } from '../../../Context/UserAuthContext'
+import './EventRegister.css'
+import HomeNavbar from '../home/HomeNavbar';
 
-function EventRegister() {
+function  EventRegister() {
     const navigate = useNavigate()
     const { user, setUser } = useContext(UserAuthContext)
     const [formData, setFormData] = useState({
@@ -36,9 +38,15 @@ function EventRegister() {
     }
     return (
         <React.Fragment>
+            <HomeNavbar/>
             {user.form ?
                 <>
-                    <p>{user.formStatus}</p>
+                <div className='container'>
+                    <div className='status'>
+
+                    <h2> Application {user.formStatus}</h2>
+                    </div>
+                    </div>
                 </>
                 :
                 <div className='container'>

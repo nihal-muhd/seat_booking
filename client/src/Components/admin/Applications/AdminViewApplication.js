@@ -53,7 +53,7 @@ function AdminViewApplication() {
                     <td>{obj.application.CompanyName}</td>
                     <td>{obj.application.companyProduct}</td>
                     <td>{obj.application.address}</td>
-                    <td><Button variant="success" onClick={() => { changeStatus("accept", obj._id) }} style={{ marginRight: 10 }}>Accept</Button><Button variant="danger" onClick={() => { changeStatus("reject", obj._id) }} >Reject</Button></td>
+                    <td><Button variant="success" onClick={() => { changeStatus("accepted", obj._id) }} style={{ marginRight: 10 }}>Accept</Button><Button variant="danger" onClick={() => { changeStatus("reject", obj._id) }} >Reject</Button></td>
                   </tr>
                 )
 

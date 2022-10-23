@@ -1,0 +1,9 @@
+.status{
+    text-align: center;
+    margin-top: 12rem;
+    height: 12rem;
+    padding-top: 5rem;
+    background-color: rgb(147, 189, 226);
+    width: 45rem;
+    margin-left: 7rem;
+}

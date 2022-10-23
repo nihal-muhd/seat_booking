@@ -8,6 +8,7 @@ import { UserAuthContext } from '../../../Context/UserAuthContext'
 
 
 
+
 function HomeNavbar(props) {
   const navigate = useNavigate()
   const { user, setUser } = useContext(UserAuthContext)
@@ -33,10 +34,11 @@ function HomeNavbar(props) {
   }
 
   return (
+    
     <React.Fragment>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand style={{ cursor: 'pointer' }} onClick={() => navigate("/")}>Tech Kerala</Navbar.Brand>
+          <Navbar.Brand style={{ cursor: 'pointer' }} onClick={() => navigate("/")}>Empower</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
@@ -69,6 +71,7 @@ function HomeNavbar(props) {
         </Container>
       </Navbar>
     </React.Fragment>
+   
   )
 }
 

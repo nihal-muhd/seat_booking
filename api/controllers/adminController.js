@@ -113,8 +113,6 @@ module.exports.reserveSeat = asyncHandler(async (req, res, next) => {
     try {
         req.body.status = true
         const data = req.body
-
-        console.log(data, "nnnnn")
         await UserModel.updateOne({ _id: data.userId }, {
             $set: {
                 seatNumber: data.seatno,
