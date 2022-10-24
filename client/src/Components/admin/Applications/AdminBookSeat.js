@@ -59,11 +59,11 @@ function AdminBookSeat() {
                                 return (
                                     <tr >
                                         <td>{d[0].status ? <Button variant="secondary" onClick={() => { window.alert("Seat have been booked") }}>{d[0].seatno}</Button> : <Button variant="success" onClick={() => { reserve(d[0]._id, d[0].seatno, userId) }}>{d[0].seatno}</Button>}</td>
-                                        <td>{d[1].status ? <Button variant="secondary" onClick={() => { window.alert("Seat have been booked") }}>{d[1].seatno}</Button> : <Button variant="success" onClick={() => { }}>{d[1].seatno}</Button>}</td>
-                                        <td>{d[2].status ? <Button variant="secondary" onClick={() => { window.alert("Seat have been booked") }}>{d[2].seatno}</Button> : <Button variant="success" onClick={() => { }}>{d[2].seatno}</Button>}</td>
-                                        <td>{d[3].status ? <Button variant="secondary" onClick={() => { window.alert("Seat have been booked") }}>{d[3].seatno}</Button> : <Button variant="success" onClick={() => { }}>{d[3].seatno}</Button>}</td>
-                                        <td>{d[4].status ? <Button variant="secondary" onClick={() => { window.alert("Seat have been booked") }}>{d[4].seatno}</Button> : <Button variant="success" onClick={() => { }}>{d[4].seatno}</Button>}</td>
-                                        <td>{d[5].status ? <Button variant="secondary" onClick={() => { window.alert("Seat have been booked") }}>{d[5].seatno}</Button> : <Button variant="success" onClick={() => { }}>{d[5].seatno}</Button>}</td>
+                                        <td>{d[1].status ? <Button variant="secondary" onClick={() => { window.alert("Seat have been booked") }}>{d[1].seatno}</Button> : <Button variant="success" onClick={() => { reserve(d[1]._id, d[1].seatno, userId) }}>{d[1].seatno}</Button>}</td>
+                                        <td>{d[2].status ? <Button variant="secondary" onClick={() => { window.alert("Seat have been booked") }}>{d[2].seatno}</Button> : <Button variant="success" onClick={() => { reserve(d[2]._id, d[2].seatno, userId) }}>{d[2].seatno}</Button>}</td>
+                                        <td>{d[3].status ? <Button variant="secondary" onClick={() => { window.alert("Seat have been booked") }}>{d[3].seatno}</Button> : <Button variant="success" onClick={() => { reserve(d[3]._id, d[3].seatno, userId) }}>{d[3].seatno}</Button>}</td>
+                                        <td>{d[4].status ? <Button variant="secondary" onClick={() => { window.alert("Seat have been booked") }}>{d[4].seatno}</Button> : <Button variant="success" onClick={() => { reserve(d[4]._id, d[4].seatno, userId) }}>{d[4].seatno}</Button>}</td>
+                                        <td>{d[5].status ? <Button variant="secondary" onClick={() => { window.alert("Seat have been booked") }}>{d[5].seatno}</Button> : <Button variant="success" onClick={() => { reserve(d[5]._id, d[5].seatno, userId) }}>{d[5].seatno}</Button>}</td>
                                     </tr>
                                 )
                             })}

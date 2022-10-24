@@ -7,9 +7,10 @@ import { UserAuthContext } from '../../../Context/UserAuthContext'
 import './EventRegister.css'
 import HomeNavbar from '../home/HomeNavbar';
 
-function  EventRegister() {
+function EventRegister() {
     const navigate = useNavigate()
     const { user, setUser } = useContext(UserAuthContext)
+    console.log(user,"numbers")
     const [formData, setFormData] = useState({
         name: '',
         address: '',
@@ -38,14 +39,15 @@ function  EventRegister() {
     }
     return (
         <React.Fragment>
-            <HomeNavbar/>
+            <HomeNavbar />
             {user.form ?
                 <>
-                <div className='container'>
-                    <div className='status'>
+                    <div className='container'>
+                        <div className='status'>
 
-                    <h2> Application {user.formStatus}</h2>
-                    </div>
+                            <h2> Application {user.formStatus}</h2>
+                            <h3>{user.reserveStatus ? user.seatNumber : 'hii'}</h3>
+                        </div>
                     </div>
                 </>
                 :

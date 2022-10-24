@@ -28,13 +28,14 @@ function HomeNavbar(props) {
       id: null,
       name: null,
       form: false,
-      formStatus: null
+      formStatus: null,
+      seatNumber: null
     })
     navigate('/login')
   }
 
   return (
-    
+
     <React.Fragment>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
@@ -71,7 +72,7 @@ function HomeNavbar(props) {
         </Container>
       </Navbar>
     </React.Fragment>
-   
+
   )
 }
 

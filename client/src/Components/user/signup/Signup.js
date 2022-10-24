@@ -56,6 +56,10 @@ function Signup() {
                   <Form.Label>Password</Form.Label>
                   <Form.Control type="password" placeholder="Password" name='password' onChange={handleChange} value={password} />
                 </Form.Group>
+                <Form.Group>
+
+                  <Form.Label onClick={() => navigate("/login")} style={{ cursor: 'pointer' }}>Already have account?</Form.Label>
+                </Form.Group>
 
                 <Button variant="primary" type="submit">
                   Submit

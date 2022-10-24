@@ -93,7 +93,7 @@ module.exports.editUser = asyncHandler(async (req, res, next) => {
 
 module.exports.approvedApplication = asyncHandler(async (req, res, next) => {
     try {
-        const application = await UserModel.find({ applicationStatus: 'accept' }).lean()
+        const application = await UserModel.find({ applicationStatus: 'accepted' }).lean()
         res.status(200).json({ status: true, application })
     } catch (error) {
 
