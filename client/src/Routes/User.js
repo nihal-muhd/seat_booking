@@ -23,7 +23,8 @@ function User() {
                     id: userData.data.user._id,
                     name: userData.data.user.name,
                     form: userData.data.user.form,
-                    formStatus: userData.data.user.applicationStatus
+                    formStatus: userData.data.user.applicationStatus,
+                    seatNumber:userData.data.user.seatNumber
                 })
             } else {
                 setUser({
@@ -31,7 +32,8 @@ function User() {
                     id: null,
                     name: null,
                     form: false,
-                    formStatus: null
+                    formStatus: null,
+                    seatNumber:null
                 })
             }
         }

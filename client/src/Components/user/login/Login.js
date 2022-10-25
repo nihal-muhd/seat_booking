@@ -35,7 +35,7 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault()
         let response = await axios.post('http://localhost:5000/login', formData, { withCredentials: true })
-        console.log(response.data.username.seatNumber, "nivhuu")
+       
         if (response.data.status === true) {
             setUser({
                 ...user,
@@ -43,7 +43,8 @@ function Login() {
                 name: response.data.username.name,
                 form: response.data.username.form,
                 formStatus: response.data.username.applicationStatus,
-                seatNumber: response.data.username.seatNumber
+                seatNumber: response.data.username.seatNumber,
+                
             })
             navigate('/')
         } else {
@@ -53,7 +54,8 @@ function Login() {
                 name: null,
                 form: false,
                 formStatus: null,
-                seatNumber: null
+                seatNumber: null,
+               
             })
 
             console.log("please enter valid passord or email");

@@ -46,7 +46,7 @@ function EventRegister() {
                         <div className='status'>
 
                             <h2> Application {user.formStatus}</h2>
-                            <h3>{user.reserveStatus ? user.seatNumber : 'hii'}</h3>
+                            <h3>{user.seatNumber ? user.seatNumber : ''}</h3>
                         </div>
                     </div>
                 </>
