@@ -14,7 +14,6 @@ function AdminApprovedApp() {
     useEffect(() => {
         async function getApplication() {
             const approved = await axios.get('http://localhost:5000/admin/approvedApplication', { withCredentials: true })
-            console.log(approved.data.application,"approved")
             if (approved.data.status === true) {
                 setApplications(approved.data.application)
             }

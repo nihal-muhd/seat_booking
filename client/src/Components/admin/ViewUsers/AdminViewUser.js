@@ -26,7 +26,6 @@ function AdminViewUser() {
     }
 
     const deleteUser = async (userId) => {
-        console.log(userId, "ihhhh");
         const dltUser = await axios.post('http://localhost:5000/admin/deleteUser', { userId: userId }, { withCredentials: true })
         if (dltUser.data.status === true) {
             const newUsers = user.filter((element) => element._id !== userId)

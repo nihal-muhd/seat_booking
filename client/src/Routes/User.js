@@ -15,8 +15,6 @@ function User() {
     useEffect(() => {
         async function getUsers() {
             const userData = await axios.get('http://localhost:5000/getUserData', { withCredentials: true })
-            console.log(userData, "context")
-            console.log(userData.data.user._id, "context")
             if (userData.data.status === true) {
                 setUser({
                     ...user,

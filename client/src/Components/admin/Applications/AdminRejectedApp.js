@@ -10,7 +10,7 @@ function AdminRejectedApp() {
     useEffect(() => {
         async function getApplication() {
             const approved = await axios.get('http://localhost:5000/admin/rejectedApplication', { withCredentials: true })
-            console.log(approved,"hiii");
+        
             if (approved.data.status === true) {
                 setApplications(approved.data.application)
             }

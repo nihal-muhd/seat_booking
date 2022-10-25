@@ -4,8 +4,8 @@ const jwt = require('jsonwebtoken')
 const seatModel = require('../models/seatModel')
 
 const adminDetails = {
-    adminID: 'admin123',
-    password: 'qwerty123'
+    adminID: process.env.ADMIN_ID,
+    password: process.env.ADMIN_PASSWORD
 }
 
 module.exports.adminLogin = asyncHandler(async (req, res, next) => {
@@ -119,11 +119,13 @@ module.exports.reserveSeat = asyncHandler(async (req, res, next) => {
                 reserveStatus: true
             }
         })
-        await seatModel.updateOne({_id:data.seatId},{$set:{
-            seatno:data.seatno,
-            status:data.status,
-            userId:data.userId
-        }})
+        await seatModel.updateOne({ _id: data.seatId }, {
+            $set: {
+                seatno: data.seatno,
+                status: data.status,
+                userId: data.userId
+            }
+        })
         res.status(201).json({ status: true })
     } catch (error) {
 
