@@ -14,6 +14,7 @@ function Signup() {
     password: ''
   })
 
+  const [error, setError] = useState('')
   const { name, email, mobile, password } = formData
 
   const handleChange = (e) => {
@@ -25,10 +26,20 @@ function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    let data = await axios.post('http://localhost:5000/signup', formData)
-    if (data) {
-      navigate("/login")
+    setError('')
+    if (formData.name === '' || formData.email === '' || formData.mobile === '' || formData.password === '') {
+      setError('Fill form complete')
+    } else if (formData.mobile.length < 10 || formData.mobile.length > 10) {
+      setError('Mobile 10 number required')
+    } else if (formData.password.length < 6) {
+      setError('Password minimum 6 letters required')
+    } else {
+      let data = await axios.post('http://localhost:5000/signup', formData)
+      if (data) {
+        navigate("/login")
+      }
     }
+
 
   }
 
@@ -56,6 +67,7 @@ function Signup() {
                   <Form.Label>Password</Form.Label>
                   <Form.Control type="password" placeholder="Password" name='password' onChange={handleChange} value={password} />
                 </Form.Group>
+                {error && <p style={{color:'red'}} className='error-form'>{error}</p>}
                 <Form.Group>
 
                   <Form.Label onClick={() => navigate("/login")} style={{ cursor: 'pointer' }}>Already have account?</Form.Label>
